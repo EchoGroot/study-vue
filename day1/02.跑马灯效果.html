@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跑马灯效果</title>
+    <script src="../lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="启动" @click="_action">
+        <input type="button" value="暂停" @click="_pause">
+        <br>
+        <h1 v-text="value"></h1>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                value:"1234567",
+                intervalId:null,
+            },
+            methods:{
+                _action(){
+                    if(this.intervalId!=null)return;
+                    //function里的this并不是指vm，要处理
+                    var _this=this;
+                    this.intervalId=setInterval(function(){
+                        var start=_this.value.substring(1);
+                        var end=_this.value.substring(0,1);
+                        _this.value=start+end;
+                    },500)
+                    //或者采用箭头函数setInterval(()=>{解决this指向问题
+               },
+                _pause(){
+                    clearInterval(this.intervalId);
+                    this.intervalId=null;
+                },
+            }
+        });
+    </script>
+</body>
+</html>

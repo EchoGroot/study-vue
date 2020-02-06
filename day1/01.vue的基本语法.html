@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-day1</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        .inner{
+            height: 150px;
+            background-color: blue; 
+        }
+    </style>
+</head>
+<body>
+    <h1>hello</h1>
+    <!-- MVVM中的V -->
+    <div id="app">
+        <p v-cloak>{{value}}</p>
+        <p v-text="msg"></p>
+        <div v-html="myhtml"></div>
+        <input type="button" value="bt" :title="mytittle+`自定义tittle`" @click="outText">
+    </div>
+    <div id="app1">
+        <hr>
+        <div class="inner" @click="divClick">
+            <button type="button" value="maopao" @click="btnClick" style="width: 120px;height: 50px;"></button>
+        </div>
+    </div>
+            <script src="../lib/vue-2.4.0.js"></script>
+    <script>
+        var vm1=new Vue({
+            el:"#app1",
+            data:{},
+            methods:{
+                btnClick(){
+                    console.log("btn点击事件")
+                },
+                divClick(){
+                    console.log("div点击事件")
+                }
+            }
+        })
+        // MVVM中VM的调度者
+        var vm=new Vue({
+            el:"#app",
+            // MVVM中的M
+            data:{
+                value:"hello vue",
+                msg:"yuyy",
+                myhtml:"<h1>VUE</h1>",
+                mytittle:"tittle",
+            },
+            methods:{
+                outText:function(){
+                    alert("hello");
+                }
+            }
+        })
+    </script>
+</body>
+</html>
