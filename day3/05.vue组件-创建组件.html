@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue组件</title>
+  <script src="../lib/vue-2.4.0.js"></script>
+</head>
+<body>
+  <div id="app">
+    <my-com1></my-com1>
+    <my-com2></my-com2>
+    <my-com3></my-com3>
+    <my-com4></my-com4>
+  </div>
+  <template id='tmp'>
+    <div>
+      <hr>
+      <h1> helle Vue 组件2</h1>
+      <h2>!!!</h2>
+    </div>
+  </template>
+  <script>
+    var com1=Vue.extend({
+      template:'<h1> helle Vue 组件</h1>'
+    })
+    Vue.component('myCom1',com1)
+    Vue.component('myCom2',Vue.extend({
+      template:'<h1> helle Vue 组件2</h1>'
+    }))
+    Vue.component('myCom3',{
+      template:'<div><hr><h1> helle Vue 组件3</h1><h2>!!!</h2></div>'
+    })
+    Vue.component('myCom4',{
+      template:'#tmp'
+    })
+    var vm = new Vue({
+      el:"#app",
+      data:{
+      },
+      methods:{
+      },
+    })
+  </script>
+</body>
+</html>

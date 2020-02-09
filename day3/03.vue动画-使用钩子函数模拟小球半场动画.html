@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../lib/vue-2.4.0.js"></script>
+  <style>
+      .ball {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: red;
+      }
+    </style>
+</head>
+<body>
+  <div id="app">
+    <input type="button" value="启动" @click="flag=!flag">
+    <transition
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+    >
+      <h1 v-if="flag" class="ball"></h1>
+    </transition>
+  </div>
+  <script>
+    var vm=new Vue({
+      el:"#app",
+      data:{
+        flag:false
+      },
+      methods:{
+        beforeEnter(el){
+          el.style.transform="translate(0,0)"
+        },
+        enter(el,done){
+          el.offsetWidth
+          el.style.transform="translate(150px,450px)"
+          el.style.transition="all 1s ease"
+          done()
+        },
+        afterEnter(el){
+          this.flag=!this.flag
+        }
+      }
+    })
+  </script>
+</body>
+</html>

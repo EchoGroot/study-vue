@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>过滤器</title>
+    <script src="../lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 不加参数 -->
+        <h3>{{msg | myFilter}}</h3>
+        <!-- 加一个参数 -->
+        <h3>{{msg | myFilter1("23")}}</h3>
+        <!-- 加多个参数 -->
+        <h3>{{msg | myFilter | myFilter1("23")}}</h3>
+    </div>
+
+    <script>
+        //定义一个全局过滤器
+        Vue.filter('myFilter',function(data){
+            return data+"!!!"
+        })
+        Vue.filter('myFilter1',function(data,arg){
+            return data+arg
+        })
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                msg:"hello vue"
+            },
+            //定义vm实例私有的过滤器
+            filters:{
+                myFilter2(){
+
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>今天吃啥</title>
+  <script src="../lib/vue-2.4.0.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1 style="text-align: center;">今天吃什么</h1><br>
+    <input style="width: 80%;margin: 0 100px;height: 50px;font-size: 25px" type="button" value="自动选择" @click="autoSelect">
+    <h2 style="text-align: center;">{{food}}</h2>
+  </div>
+  <script>
+    var vm=new Vue({
+      el:"#app",
+      data:{
+        foodList:['冬瓜','杏鲍菇','藕'],
+        food:''
+      },
+      methods:{
+        autoSelect(){
+          var n=Math.floor(Math.random()*10)%3;
+          this.food=this.foodList[n]
+        }
+      }
+    })
+  </script>
+</body>
+</html>

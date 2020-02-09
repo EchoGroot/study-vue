@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="../lib/vue-2.4.0.js"></script>
+  <style>
+    .v-enter,.v-leave-to{
+      opacity: 0;
+      transform: translateX(200px)
+    }
+    .v-enter-active,.v-leave-active{
+      transition: all 0.8s ease
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <input type="button" value="显示/消失" @click="flag=!flag">
+    <transition>
+      <h1 v-if="flag">Hello</h1>
+    </transition>
+  </div>
+  <script>
+    var vm=new Vue({
+      el:"#app",
+      data:{
+        flag:false
+      }
+    })
+  </script>
+</body>
+</html>

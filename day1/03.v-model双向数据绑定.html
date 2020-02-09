@@ -10,14 +10,44 @@
 <body>
     <div id="app">
         <h2 v-text="msg"></h2>
-        <input type="text" v-model="msg" style="width: 80%;">
+        <input type="text" v-model="msg" style="width: 80%;"><br>
+        <input type="text" v-model="pram1">
+        <select v-model="opra">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" v-model="pram2">
+        <input type="button" @click="com" value="=">
+        <span>{{ans}}</span>
+        
     </div>
 
     <script>
         var vm=new Vue({
             el:"#app",
             data:{
+                pram1:0,
+                pram2:0,
+                opra:"+",
+                ans:0,
                 msg:"hello vue!",
+            },
+            methods:{
+                com(){
+                    // switch (this.opra){
+                    //     case "+":this.ans=parseInt(this.pram1)+parseInt(this.pram2);
+                    //         break;
+                    //     case "-":this.ans=parseInt(this.pram1)-parseInt(this.pram2);
+                    //         break;
+                    //     case "*":this.ans=parseInt(this.pram1)*parseInt(this.pram2);
+                    //         break;
+                    //     case "/":this.ans=parseInt(this.pram1)/parseInt(this.pram2);
+                    //         break;    
+                    // }
+                    this.ans=eval(`parseInt(this.pram1)`+this.opra+`parseInt(this.pram2)`)
+                }
             }
         })
     </script>
