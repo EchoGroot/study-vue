@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>REF</title>
+  <script src="../lib/vue-2.4.0.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="button" value="获取DOM元素" @click="get">
+    <com1 ref="mytemplate"></com1>
+    <h3 ref="myh3">获取的元素</h3>
+  </div>
+
+  <template id="tmp1" >
+    <h2>tmp1 !!!   {{msg}}</h2>
+  </template>
+  <script>
+    var com1={
+          template:"#tmp1",
+          data(){
+            return{
+              msg:"vue"
+            }
+          },
+          methods:{
+            tmp1show(){
+              alert("tmp1")
+            }
+          }
+        }
+    var vm = new Vue({
+      el:"#app",
+      data:{
+      },
+      methods:{
+        get(){
+          console.log("hello")
+          console.log(this.$refs.myh3.innerText)
+          this.$refs.mytemplate.tmp1show()
+        }
+      },
+      components:{
+        com1
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <script src="/bundle.js"></!--> 
+  <title>index</title>
+</head>
+<body>
+  <!-- ul>li*10{这是地$个li} -->
+  <ul>
+    <li>这是第1个li</li>
+    <li>这是第2个li</li>
+    <li>这是第3个li</li>
+    <li>这是第4个li</li>
+    <li>这是第5个li</li>
+    <li>这是第6个li</li>
+    <li>这是第7个li</li>
+    <li>这是第8个li</li>
+    <li>这是第9个li</li>
+    <li>这是第10个li</li>
+  </ul>
+  <div class="box"></div>
+  <hr>
+  <div id="app1">
+    <h1>{{msg}}</h1>
+  </div>
+  <hr>
+  <div id="app2">
+    <router-link to="/com1">to com1</router-link>
+    <router-link to="/com2">to com2</router-link>
+    <router-link to="/com3">to com3</router-link>
+    <router-view></router-view>
+    <hr>
+
+    <router-view name="comt1"></router-view>
+    <router-view name="comt2"></router-view>
+    <router-view name="comt3"></router-view>
+    <hr>
+  </div>
+</body>
+</html>

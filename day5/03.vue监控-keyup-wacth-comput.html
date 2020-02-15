@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>vue监控</title>
+  <script src="../lib/vue-2.4.0.js"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="firstinput" @keyup='show'>
+    <span> + </span>
+    <input type="text" v-model='secondinput' @keyup='show'>
+    <span> = {{lastinput}}</span>
+    <hr>
+    <input type="text" v-model="firstinput1" >
+    <span> + </span>
+    <input type="text" v-model='secondinput1' >
+    <span> = {{lastinput1}}</span>
+    <hr>
+    <input type="text" v-model="firstinput2" >
+    <span> + </span>
+    <input type="text" v-model='secondinput2' >
+    <span> = {{lastinput2}}</span>
+  </div>
+  <script>
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        firstinput:'',
+        secondinput:'',
+        lastinput:'',
+        firstinput1:'',
+        secondinput1:'',
+        lastinput1:'',
+        firstinput2:'',
+        secondinput2:'',
+        //lastinput2:'',
+      },
+      methods:{
+        show(){
+          this.lastinput=this.firstinput+"---"+this.secondinput
+        },
+      },
+      watch:{
+        'firstinput1':function(newVal,oldVal){
+          this.lastinput1=this.firstinput1+"---"+this.secondinput1
+          console.log(newVal+"---"+oldVal)
+        },
+        'secondinput1':function(newVal,oldVal){
+          this.lastinput1=this.firstinput1+"---"+this.secondinput1
+          console.log(newVal+"---"+oldVal)
+        },
+        //  this.$route.path
+        // '$route.path': function (newVal, oldVal) {
+        //   // console.log(newVal + ' --- ' + oldVal)
+        //   if (newVal === '/login') {
+        //     console.log('欢迎进入登录页面')
+        //   } else if (newVal === '/register') {
+        //     console.log('欢迎进入注册页面')
+        //   }
+        // }
+      },
+      computed:{
+        'lastinput2':function(){
+          return this.firstinput2+"---"+this.secondinput2
+        }
+      }
+    })
+  </script>
+</body>
+</html>

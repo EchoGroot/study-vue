@@ -1,0 +1,14 @@
+html,body{
+  padding: 0px;
+  margin: 0px;
+  background-color:cyan;
+}
+li{
+  list-style:none;
+}
+.box{
+  width:50%;
+  height:200px;
+  background:url(../images/深度截图_选择区域_20200210144608.png);
+  background-size:cover;
+}

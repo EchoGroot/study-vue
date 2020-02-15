@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <script src="../lib/vue-2.4.0.js"></script>
+</head>
+<body>
+  <div id="app">
+    <com1 :parentmsgcom1="parentmsg" @parentfunccom1="parentshow"></com1>
+  </div>
+  <template id="tmp1">
+    <div>
+      <h1>子组件</h1>
+      <h2>子组件的msg</h2>
+      <h3>父组件的msg--{{parentmsgcom1}}</h3>
+      <input type="button" value="send msg to parent" @click="send">
+    </div>
+  </template>
+  <script>
+    var com1={
+      template:"#tmp1",
+      data(){
+        return {
+          msg:"msg of son"
+        }
+      },
+      props:['parentmsgcom1'],
+      methods:{
+        send(data){
+          this.$emit('parentfunccom1','msg of son')
+        }
+      }
+    }
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        parentmsg:"msg of parent"
+      },
+      methods:{
+        parentshow(data){
+          console.log(data)
+        }
+      },
+      components:{
+        com1,
+      },
+    
+    })
+  </script>
+</body>
+</html>

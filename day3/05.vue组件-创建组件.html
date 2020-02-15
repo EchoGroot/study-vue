@@ -13,6 +13,8 @@
     <my-com2></my-com2>
     <my-com3></my-com3>
     <my-com4></my-com4>
+    <my-com5></my-com5>
+    <tmp2></tmp2>
   </div>
   <template id='tmp'>
     <div>
@@ -22,6 +24,12 @@
     </div>
   </template>
   <script>
+    var tmp2={
+      template:'<h1> helle Vue 组件6</h1>'
+    }
+    var tmp1={
+      template:'<h1> helle Vue 组件</h1>'
+    }
     var com1=Vue.extend({
       template:'<h1> helle Vue 组件</h1>'
     })
@@ -35,12 +43,16 @@
     Vue.component('myCom4',{
       template:'#tmp'
     })
+    Vue.component('myCom5',tmp1)
     var vm = new Vue({
       el:"#app",
       data:{
       },
       methods:{
       },
+      components:{
+        tmp2
+      }
     })
   </script>
 </body>

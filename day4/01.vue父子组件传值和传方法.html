@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>父子组件传值传方法</title>
+  <script src="../lib/vue-2.4.0.js"></script>
+</head>
+<body>
+  <template id="tmp">
+    <div @click="myfunc('~')">
+      <h1>父组件向子组件传值</h1>
+      <h2>{{msg}}</h2>
+      <h2 >2.{{parentmsg}}</h2>
+    </div>
+  </template>
+  <div id="app">
+    <com :parentmsg="parentmsg1" @func="show"></com>
+  </div>
+  <script>
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        parentmsg1:"父组件的data"
+      },
+      methods:{
+        show(datastr){
+          console.log("hello")
+          this.parentmsg1=this.parentmsg1+datastr
+        }
+      },
+      components:{
+        com:{
+          template:"#tmp",
+          data(){
+            return {
+              msg:"子组件的data"
+            }
+          },
+          props:['parentmsg'],
+          methods:{
+            myfunc(datastr){
+              this.$emit('func',datastr)
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

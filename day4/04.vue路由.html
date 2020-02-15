@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>route</title>
+  <script src="../lib/vue-2.4.0.js"></script>
+  <script src="../lib/vue-router-3.0.1.js"></script>
+</head>
+<body>
+  <div id="app">
+    <router-link to="/login/12/sd">to login</router-link>
+    <router-link to="/register?id=10&name=zs">to register</router-link>
+    <router-view></router-view>
+    <hr>
+    <router-view name="rva"></router-view>
+  </div>
+  <template id="tmp3" style="background-color: wheat">
+    <div>
+      <h1>AAAAAAAAA</h1>
+      <router-link to="/a/login/12/sd">to login</router-link>
+      <router-link to="/a/register?id=10&name=zs">to register</router-link>
+      <router-view></router-view>
+      
+          </div>
+  </template>
+  <template id="tmp1">
+    <h1>login</h1>
+  </template>
+  <template id="tmp2">
+      <h1>注册</h1>
+    </template>
+  <script>
+    var coma={
+      template:"#tmp3"
+    }
+    var comlogin={
+      template:"#tmp1",
+      created(){ // 组件的生命周期钩子函数
+       
+        this.show()
+      },
+      methods:{
+        show(){
+          
+          console.log(this.$route.params)
+        }
+      }
+    }
+    var comregister={
+      template:"#tmp2",
+      data(){
+        return{ID:''}
+      },
+      created(){ // 组件的生命周期钩子函数
+        console.log(this.$route)
+        console.log(this.$route.query.id)
+        this.show()
+      },
+      methods:{
+        show(){
+          this.ID=this.$route.query.id
+          console.log(this.ID)
+          console.log(this.$route.params)
+        }
+      }
+    }
+    var routeobj=new VueRouter({
+      routes:[
+        //{path:'/',redirect:'/login'},
+        //{path:'/login/:id/:name',component:comlogin},
+        //{path:'/register',component:comregister},
+        {path:'/a',components:{
+          'rva':coma
+        },children:[
+        {path:'login/:id/:name',component:comlogin},
+        {path:'register',component:comregister},
+        ]}
+      ]
+    })
+    var vm = new Vue({
+      el:"#app",
+      data:{
+      },
+      methods:{
+      },
+      components:{
+        
+      },
+      router:routeobj
+    })
+  </script>
+</body>
+</html>

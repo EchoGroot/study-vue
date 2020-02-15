@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>评论列表</title>
+  <script src="../lib/vue-2.4.0.js"></script>
+  <style>
+    li {
+      border: 1px dashed #999;
+      width: 100%;
+      font-size: 18px;
+    }
+
+    li:hover {
+      background-color: bisque;
+      transition: all 0.5s ease;
+    }
+
+    .v-enter,
+    .v-leave-to {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+
+    .v-enter-active,
+    .v-leave-active {
+      transition: all 1s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <template id="tmp">
+    <transition appear>
+      <div>
+        <label>评论人：<input type="text" v-model="inputname"></label>
+        <label>评论者：<input type="text" v-model="inputcontent"></label>
+        <input type="button" value="提交" @click="add">
+      </div>
+    </transition>
+  </template>
+  <div id="app">
+    <com @func="show"></com>
+    <transition-group appear tag ul>
+      <li v-for="item in locallist" :key='item.id'>
+        <span>Name:{{item.name}} content:{{item.content}}</span>
+      </li>
+    </transition-group>
+  </div>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        locallist:null,
+        list: [{
+          id: Date.now(), name: "张三", content: '进口附近看到'
+        },
+        {
+          id: Date.now(), name: "李四", content: '打好久好久'
+        }]
+      },
+      methods: {
+        show(){
+          this.locallist=JSON.parse(localStorage.getItem('cmts')||'[]')
+
+        }
+      },
+      components: {
+        com: {
+          template:"#tmp",
+          data() {
+            return {
+              inputname: '',
+              inputcontent: ''
+
+            }
+          },
+          methods:{
+            add(){
+              var comment={
+                id:Date.now(),
+                name:this.inputname,
+                content:this.inputcontent
+              }
+              var locallist=JSON.parse(localStorage.getItem('cmts')||'[]')
+              locallist.unshift(comment)
+              localStorage.setItem('cmts',JSON.stringify(locallist))
+              this.inputname=this.inputcontent=''
+              this.$emit('func')
+            }
+          }
+        }
+      },
+      created(){
+        this.show()
+      }
+      
+    })
+  </script>
+</body>
+
+</html>
